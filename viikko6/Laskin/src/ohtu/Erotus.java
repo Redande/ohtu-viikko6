@@ -7,6 +7,7 @@ public class Erotus implements Komento {
     private Sovelluslogiikka sovellus;
     private JTextField tuloskentta;
     private JTextField syotekentta;
+    private int edellinenArvo;
 
     public Erotus(Sovelluslogiikka sovellus, JTextField tuloskentta, JTextField syotekentta) {
         this.sovellus = sovellus;
@@ -15,7 +16,7 @@ public class Erotus implements Komento {
     }
 
     @Override
-    public void suorita() {
+    public void suorita() {        
         int arvo = 0;
 
         try {
@@ -24,6 +25,8 @@ public class Erotus implements Komento {
         }
 
         sovellus.miinus(arvo);
+        
+        edellinenArvo = arvo;
 
         syotekentta.setText("");
         tuloskentta.setText("" + sovellus.tulos());
@@ -31,6 +34,10 @@ public class Erotus implements Komento {
 
     @Override
     public void peru() {
+        sovellus.plus(edellinenArvo);
+        
+        syotekentta.setText("");
+        tuloskentta.setText("" + sovellus.tulos());
     }
 
 }
